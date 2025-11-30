@@ -1,23 +1,28 @@
-# ====== ETAPA 1: COMPILAR EL PROYECTO ======
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+# ---------- Etapa 1: Construcción ----------
+FROM eclipse-temurin:21-jdk-alpine AS build
 
-# Copiar todo el backend al contenedor
-WORKDIR /build
-COPY pcge-backend-0.0.1-SNAPSHOT.jar
-
-
-# Compilar y generar el JAR sin tests (más rápido)
-RUN mvn clean package -DskipTests
-
-
-# ====== ETAPA 2: EJECUTAR EL JAR ======
-FROM eclipse-temurin:21-jre-alpine
-
+# Crear carpeta de trabajo
 WORKDIR /app
 
-# Copiar desde la etapa de compilación el jar generado
-COPY --from=build /build/target/*.jar app.jar
+# Copiar archivos del proyecto (pom.xml y código fuente)
+COPY pom.xml .
+COPY src ./src
 
+# Compilar el proyecto y generar el JAR
+RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
+
+
+# ---------- Etapa 2: Ejecución ----------
+FROM eclipse-temurin:21-jre-alpine
+
+# Carpeta interna
+WORKDIR /app
+
+# Copiar el JAR generado desde la etapa anterior
+COPY --from=build /app/target/*.jar app.jar
+
+# Puerto del backend
 EXPOSE 8085
 
+# Ejecutar Spring Boot
 ENTRYPOINT ["java", "-jar", "app.jar"]
