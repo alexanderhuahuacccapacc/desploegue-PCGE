@@ -1,12 +1,33 @@
+# ---------- Etapa 1: Construcción ----------
+FROM eclipse-temurin:21-jdk-alpine AS builder
+
+WORKDIR /app
+
+# Copiamos el pom y descargamos dependencias (cache build)
+COPY pom.xml .
+RUN ./mvnw dependency:go-offline || true
+
+# Copiamos el código
+COPY src ./src
+COPY mvnw .
+COPY .mvn ./.mvn
+
+# Damos permisos de ejecución al wrapper
+RUN chmod +x mvnw
+
+# Compilamos el proyecto
+RUN ./mvnw clean package -DskipTests
+
+# ---------- Etapa 2: Imagen final ----------
 FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-# Copia el JAR ya compilado
-COPY pcge-backend-0.0.1-SNAPSHOT.jar app.jar
+# Copiamos el jar final desde la etapa builder
+COPY --from=builder /app/target/*.jar app.jar
 
-# Expón el puerto
+# Render detecta el puerto automáticamente si está expuesto
 EXPOSE 8085
 
-# Comando de ejecución
+# Ejecutamos la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
