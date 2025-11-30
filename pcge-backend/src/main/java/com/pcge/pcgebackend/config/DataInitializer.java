@@ -29,8 +29,8 @@ public class DataInitializer implements CommandLineRunner {
     private void cargarCuentasBasicas() {
         // ACTIVO
         Cuenta activo = new Cuenta();
-        activo.setCodigo("10");
-        activo.setNombre("ACTIVO");
+        activo.setCodigo("101");
+        activo.setNombre("CAJA");
         activo.setNivel(1);
         activo.setTipo("ACTIVO");
         activo.setPadreId(null);
@@ -38,7 +38,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Cuenta caja = new Cuenta();
         caja.setCodigo("121");
-        caja.setNombre("CAJA");
+        caja.setNombre("Facturas por cobrar");
         caja.setNivel(2);
         caja.setTipo("ACTIVO");
         caja.setPadreId("101");
