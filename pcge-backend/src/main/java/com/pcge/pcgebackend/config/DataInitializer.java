@@ -41,15 +41,15 @@ public class DataInitializer implements CommandLineRunner {
         caja.setNombre("Facturas por cobrar");
         caja.setNivel(2);
         caja.setTipo("ACTIVO");
-        caja.setPadreId("101");
+        caja.setPadreId("12");
         cuentaRepository.save(caja);
 
         Cuenta cajaGeneral = new Cuenta();
-        cajaGeneral.setCodigo("1011");
-        cajaGeneral.setNombre("Caja General");
+        cajaGeneral.setCodigo("102");
+        cajaGeneral.setNombre("Fondos fijos");
         cajaGeneral.setNivel(3);
         cajaGeneral.setTipo("ACTIVO");
-        cajaGeneral.setPadreId("101");
+        cajaGeneral.setPadreId("10");
         cuentaRepository.save(cajaGeneral);
 
         Cuenta bancos = new Cuenta();
@@ -63,9 +63,9 @@ public class DataInitializer implements CommandLineRunner {
         // PASIVO
         Cuenta pasivo = new Cuenta();
         pasivo.setCodigo("20");
-        pasivo.setNombre("PASIVO");
+        pasivo.setNombre("Activo");
         pasivo.setNivel(1);
-        pasivo.setTipo("PASIVO");
+        pasivo.setTipo("Activo");
         pasivo.setPadreId(null);
         cuentaRepository.save(pasivo);
 
@@ -87,7 +87,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Cuenta igv = new Cuenta();
         igv.setCodigo("4011");
-        igv.setNombre("IGV");
+        igv.setNombre("impuestos generales a las ventas");
         igv.setNivel(3);
         igv.setTipo("PASIVO");
         igv.setPadreId("401");
@@ -95,7 +95,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Cuenta igvPorPagar = new Cuenta();
         igvPorPagar.setCodigo("40111");
-        igvPorPagar.setNombre("IGV por Pagar");
+        igvPorPagar.setNombre("IGV ");
         igvPorPagar.setNivel(4);
         igvPorPagar.setTipo("PASIVO");
         igvPorPagar.setPadreId("4011");

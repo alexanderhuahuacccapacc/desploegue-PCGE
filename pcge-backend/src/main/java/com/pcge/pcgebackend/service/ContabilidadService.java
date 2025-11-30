@@ -29,7 +29,7 @@ public class ContabilidadService {
     private static final String CUENTA_CAJA = "121";
     private static final String CUENTA_VENTAS = "701";
     private static final String CUENTA_IGV = "40111";
-    private static final String CUENTA_EFECTIVO = "101"; // ✅ NUEVA CUENTA
+    private static final String CUENTA_EFECTIVO = "101";
     private static final BigDecimal IGV_PORCENTAJE = new BigDecimal("0.18");
 
     public ContabilidadService(AsientoContableRepository asientoRepository,
@@ -69,7 +69,7 @@ public class ContabilidadService {
         Cuenta cuentaCaja = obtenerCuentaOError(CUENTA_CAJA, "Cuenta Caja no configurada");
         Cuenta cuentaVentas = obtenerCuentaOError(CUENTA_VENTAS, "Cuenta Ventas no configurada");
         Cuenta cuentaIgv = obtenerCuentaOError(CUENTA_IGV, "Cuenta IGV no configurada");
-        Cuenta cuentaEfectivo = obtenerCuentaOError(CUENTA_EFECTIVO, "Cuenta Efectivo no configurada"); // ✅ NUEVA
+        Cuenta cuentaEfectivo = obtenerCuentaOError(CUENTA_EFECTIVO, "Cuenta Efectivo no configurada");
 
         // Calcular montos
         BigDecimal montoTotal = request.getMontoTotal();
