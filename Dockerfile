@@ -6,8 +6,8 @@ FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Copiamos solo los archivos necesarios primero (optimiza cache)
-COPY pom.xml .
-COPY src ./src
+COPY pcge-backend-0.0.1-SNAPSHOT.jar app.jar
+
 
 # Construimos el JAR
 RUN mvn clean package -DskipTests
