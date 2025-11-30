@@ -5,7 +5,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copiar automáticamente cualquier archivo .jar que esté en la carpeta
-COPY *.jar app.jar
+COPY *.jar pcge-backend-0.0.1-SNAPSHOT.jar
 
 # Exponer puerto del backend
 EXPOSE 8085
